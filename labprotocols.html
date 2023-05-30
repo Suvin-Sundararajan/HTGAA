@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTGAA: Labs</title>
+  <link rel="stylesheet" href="github-markdown.css">
+  <style>
+    body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+    
+    .markdown-body .custom-paragraph {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .markdown-body .custom-paragraph span {
+      margin-right: 10px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+      background-color: #f1f1f1;
+      font-weight: bold;
+    }
+    .lab-box {
+  background-color: #f1f1f1;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.panel a {
+  display: block;
+  margin: 10px 0;
+}
+
+.lab-box img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.lab-box h3 {
+  margin-bottom: 5px;
+  color: #333;
+}
+.panel {
+  display: inline-block;
+  border: 1px solid #ccc;
+  background-color: #f2f2f2;
+  width: 100%; /* Adjust the width to fit the desired size */
+  height: 100%; /* Adjust the height to fit the desired size */
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.panel a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.panel:hover {
+  background-color: #e0e0e0;
+}
+
+.panel-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.panel {
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.panel a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.panel:hover {
+  background-color: #e0e0e0;
+}
+
+
+.collapsible {
+  position: relative;
+  background-color: #f2f2f2;
+  border: none;
+  color: #333; /* Adjust the color to match the header */
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  font-size: 20px; /* Adjust the font size to match the header */
+  font-weight: bold; /* Adjust the font weight to match the header */
+  border-radius: 5px;
+}
+
+.view-protocol {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #dbc4c4;
+  color: #333;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.view-protocol:hover {
+  background-color: #ccc;
+}
+
+.collapsible {
+  position: relative;
+  background-color: #f2f2f2;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+
+
+.content {
+  display: none;
+  padding: 10px;
+}
+
+.collapsible.active {
+  background-color: #e0e0e0;
+}
+
+.collapsible.active + .content {
+  display: block;
+}
+
+.table-container {
+  position: relative;
+}
+
+.table-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: 1px;
+  height: 100%;
+  background-color: #ddd;
+}
+
+.table-container table {
+  margin-left: 10px; /* Adjust the margin as needed */
+}
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+  <article class="markdown-body">
+    <h2>HTGAA: Labs</h2>
+    
+    <hr>
+    <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Lab</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2019</td>
+         
+           
+          <td>
+            <div class="lab-box">
+                <button class="collapsible">Biodesign (2/14)<span><a href="./labprotocol/biodesign.html" class="view-protocol">View Protocol</a>
+                </span></button>
+                <div class="content">
+                  <p class="custom-paragraph">
+                    <span><strong><i>3/7, Updated 05/30/2023</i></strong></span>
+                    <strong> Patrick Boyle (Ginkgo Bioworks) (MIT) </strong>
+                  </p>
+                  <img src="./labprotocol/images/lycopene_pathway.jpg" alt="Lycopene Pathway">
+                  <!-- <p>Test the impact of genes and culture conditions (i.e., temperature and growth media composition) on the production of lycopene in <i>E. coli</i>.</p> -->
+                </div>
+              </div>
+                <p>Test the impact of genes and culture conditions (i.e., temperature and growth media composition) on the production of lycopene in <i>E. coli</i>.</p>
+        
+
+
+                <div class="lab-box">
+                    <button class="collapsible">Bioproduction<span><a href="./labprotocol/bioproduction.html" class="view-protocol">View Protocol</a>
+                    </span></button>
+                    <div class="content">
+                      <p class="custom-paragraph">
+                        <span><strong><i>3/7, Updated 05/30/2023</i></strong></span>
+                        <strong> Patrick Boyle (Ginkgo Bioworks) (MIT) </strong>
+                      </p>
+                      <img src="./images/lycopene_pathway.jpg" alt="Lycopene Pathway">
+                      <!-- <p>Test the impact of genes and culture conditions (i.e., temperature and growth media composition) on the production of lycopene in <i>E. coli</i>.</p> -->
+                    </div>
+                  </div>
+                    <p>Test the impact of genes and culture conditions (i.e., temperature and growth media composition) on the production of lycopene in <i>E. coli</i>.</p>
+            
+    
+    
+                    <div class="lab-box">
+                        <button class="collapsible">Next Generation Synthesis<span><a href="https://www.apple.com" class="view-protocol">View Protocol</a>
+                        </span></button>
+                        <div class="content">
+                          <p class="custom-paragraph">
+                            <span><strong><i>3/7, Updated 05/30/2023</i></strong></span>
+                            <strong> Patrick Boyle (Ginkgo Bioworks) (MIT) </strong>
+                          </p>
+                          <img src="./images/lycopene_pathway.jpg" alt="Lycopene Pathway">
+                          <!-- <p>Test the impact of genes and culture conditions (i.e., temperature and growth media composition) on the production of lycopene in <i>E. coli</i>.</p> -->
+                        </div>
+                      </div>
+                        <p>Test the impact of genes and culture conditions (i.e., temperature and growth media composition) on the production of lycopene in <i>E. coli</i>.</p>
+                
+                        <div class="lab-box">
+                            <button class="collapsible">Protein Design (Virtual)<span><a href="https://www.apple.com" class="view-protocol">View Protocol</a>
+                            </span></button>
+                            <div class="content">
+                              <p class="custom-paragraph">
+                                <span><strong><i>3/7, Updated 05/30/2023</i></strong></span>
+                                <strong> Patrick Boyle (Ginkgo Bioworks) (MIT) </strong>
+                              </p>
+                              <img src="./images/lycopene_pathway.jpg" alt="Lycopene Pathway">
+                              <!-- <p>Test the impact of genes and culture conditions (i.e., temperature and growth media composition) on the production of lycopene in <i>E. coli</i>.</p> -->
+                            </div>
+                          </div>
+                            <p>Test the impact of genes and culture conditions (i.e., temperature and growth media composition) on the production of lycopene in <i>E. coli</i>.</p>
+                    
+            
+        
+
+          </td>
+
+          </td>
+        </tr>
+        <tr>
+          <td>2021</td>
+          <td>
+            <!-- Lab content for 2021 -->
+          </td>
+        </tr>
+        <tr>
+          <td>2022</td>
+          <td>
+            <!-- Lab content for 2022 -->
+          </td>
+        </tr>
+        <tr>
+          <td>2023</td>
+          <td>
+            <!-- Lab content for 2023 -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+  
+  </article>
+</body>
+<script>
+    // Get all the collapsible buttons
+const collapsibleButtons = document.querySelectorAll('.collapsible');
+
+// Loop through each button and add a click event listener
+collapsibleButtons.forEach((button) => {
+  button.addEventListener('click', function () {
+    this.classList.toggle('active');
+    const content = this.nextElementSibling;
+    if (content.style.display === 'block') {
+      content.style.display = 'none';
+    } else {
+      content.style.display = 'block';
+    }
+  });
+});
+
+</script>
+</html>
