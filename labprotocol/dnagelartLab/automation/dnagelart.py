@@ -70,7 +70,7 @@ for i, enzyme in enumerate(tubes.columns()[1:]):
 pipette.drop_tip(tiprack.wells('A9'))
 
 # Incubation
-robot.incubate(temperature=37, duration=incubation_time * minutes)
+robot.incubate(temperature=37, duration=incubation_time * 10)#minutes
 
 # Protocol complete
 print(f"Protocol completed for {n_tubes} PCR tubes.")
