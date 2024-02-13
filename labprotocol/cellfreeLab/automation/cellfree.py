@@ -12,7 +12,7 @@ INCUBATION_TIME=1 # TODO change it to the actul required time
 metadata = {    "apiLevel": "2.14",    "protocolName": "Cell-Free protocol for HTGAA 2024",    "description": """The 2024 version of the lab is at 
                    https://howtogrowalmostanything.notion.site/Class-6-Cell-Free-Systems-05bf5e89d25a48feb557b5a26900bcec""",    "author": "adrian for HTGAA 2024"}
 
-# for OT  requirements block is optional so we will not include it for now. If included should remove API from metadata requirements = {"robotType": "OT-2", "apiLevel": "2.16"}
+# for OT2 the requirements block is optional so we will not include it for now. If included should remove API from metadata requirements = {"robotType": "OT-2", "apiLevel": "2.16"}
 stockLiquids:Dict=dict()
 logger = logging.getLogger(__name__)
 
