@@ -5,15 +5,12 @@ from opentrons.protocol_api._liquid import Liquid
 import logging
 
 
-
 INCUBATION_TIME=1 # fake constant
 #see https://docs.opentron s.com/v2/tutorial.html for introduction to Opentron proramming and 
 #https://pypi.org/project/opentrons/ for installing latest opentron lib "pip install --upgrade opentrons" from VSS console
 
-
 metadata = {    "apiLevel": "2.14",    "protocolName": "Cell-Free protocol for HTGAA 2024",    "description": """The 2024 version of the lab is at 
-                   https://howtogrowalmostanything.notion.site/Class-6-Cell-Free-Systems-05bf5e89d25a48feb557b5a26900bcec""",    "author": "adrian for HTGAA 2024"
-    }
+                   https://howtogrowalmostanything.notion.site/Class-6-Cell-Free-Systems-05bf5e89d25a48feb557b5a26900bcec""",    "author": "adrian for HTGAA 2024"}
 
 # for OT  requirements block is optional so we will not include it for now. If included should remove API from metadata requirements = {"robotType": "OT-2", "apiLevel": "2.16"}
 stockLiquids:Dict=dict()
@@ -30,15 +27,13 @@ def total(stockLiquids:Dict):
         total=total+2
     return 0  
 
-def findLiquid():
-    print("sdfds")
-      
 def run(protocol: protocol_api.ProtocolContext):
+    print("Starting Cell Free Protocol using https://howtogrowalmostanything.notion.site/Class-6-Cell-Free-Systems-05bf5e89d25a48feb557b5a26900bcec info ")
     tips = protocol.load_labware("opentrons_96_tiprack_300ul", 1)
     reservoir = protocol.load_labware("nest_12_reservoir_15ml", 2)
     plate:Labware = protocol.load_labware("nest_96_wellplate_200ul_flat", 3)
-    #workingConcenotration ??
     left_pipette = protocol.load_instrument("p300_single_gen2", "left", tip_racks=[tips])
+    # define liquids
     water=stockLiquid( reservoir["A9"], 50, protocol.define_liquid( name="water", description="water to total (at end)    # 9.60ul", display_color="#00FF00",))
     mgGlutamate: Liquid= stockLiquid( reservoir["A1"], 50, protocol.define_liquid( name="mgGlutamate", description="Mg-glutamate (mM) 7.2ul", display_color="#00FF00",))
     kGlutamate=stockLiquid( reservoir["A2"], 50, protocol.define_liquid( name="kGlutamate", description="K-glutamate (mM)    # 2.8ul", display_color="#FF0000",))
@@ -54,18 +49,19 @@ def run(protocol: protocol_api.ProtocolContext):
     #print(stockLiquids)
     onePot=plate.wells_by_name()['A1']
     left_pipette.transfer(9.6, stockLiquids.get(water.name), onePot )              #,  mix_after(3, 50))
+
     left_pipette.transfer(7.2, stockLiquids.get(mgGlutamate.name), onePot )   
     left_pipette.transfer(2.8, stockLiquids.get(kGlutamate.name), onePot )   
     left_pipette.transfer(1.2, stockLiquids.get(ddt.name), onePot )  
 
-    # next is 10x stock so we need to dilute to working concentration 
+    # energy is 10x stock so we need to dilute to working concentration 
     energyWorking=stockLiquid( reservoir["A10"], 0, protocol.define_liquid( name="energyWorking", description="energy at working concentration", display_color="#00FF00",))
     left_pipette.transfer(27, stockLiquids.get(water.name), stockLiquids.get(energyWorking.name ))
     left_pipette.transfer(3, stockLiquids.get(energy10x.name), stockLiquids.get(energyWorking.name ))
 
     left_pipette.transfer(6, stockLiquids.get(energyWorking.name), onePot )   
 
-    # next is 20x stock
+    # amino acids are 20x stock so we need to dilute to working concentration
     aminoAcidsWorking=stockLiquid( reservoir["A10"], 0, protocol.define_liquid( name="aminoAcidsWorking", description="energy at working concentration", display_color="#00FF00",))
     left_pipette.transfer(57, stockLiquids.get(water.name), stockLiquids.get(aminoAcidsWorking.name ))
     left_pipette.transfer(3, stockLiquids.get(aminoAcids20x.name), stockLiquids.get(aminoAcidsWorking.name ))
@@ -81,7 +77,7 @@ def run(protocol: protocol_api.ProtocolContext):
     # If you’re curious how long that will take, you can use an experimental feature to estimate the time:
     # opentrons_simulate dilution-tutorial.py -e -o nothing
 
-    ################## initial prtocol used to develop a draft code
+    ################## initial prtocol used to develop the code
     # water to total (at end)    # 9.60ul
     # Mg-glutamate (mM)    # 7.2ul
     # K-glutamate (mM)    # 2.8ul
