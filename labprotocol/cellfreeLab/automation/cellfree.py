@@ -5,7 +5,7 @@ from opentrons.protocol_api._liquid import Liquid
 import logging
 
 
-INCUBATION_TIME=1 # fake constant
+INCUBATION_TIME=1 # TODO change it to the actul required time
 #see https://docs.opentron s.com/v2/tutorial.html for introduction to Opentron proramming and 
 #https://pypi.org/project/opentrons/ for installing latest opentron lib "pip install --upgrade opentrons" from VSS console
 
