@@ -2,19 +2,22 @@ from typing import (   Dict,    List,    NamedTuple,    Optional,    Type,    Un
 from opentrons import protocol_api
 from opentrons.protocol_api.labware import Labware, Well
 from opentrons.protocol_api._liquid import Liquid
+from opentrons.protocol_api.instrument_context import InstrumentContext
 import logging
 
 
 INCUBATION_TIME=1 # TODO change it to the actul required time
 #see https://docs.opentron s.com/v2/tutorial.html for introduction to Opentron proramming and 
 #https://pypi.org/project/opentrons/ for installing latest opentron lib "pip install --upgrade opentrons" from VSS console
-
+# in the future will be able to use 3D printed modules like https://github.com/MicroPhen/taco/blob/master/3D-printed-parts/petri_dish_adapter.stl
+# based on https://support.opentrons.com/s/article/What-is-a-labware-definition
 metadata = {    "apiLevel": "2.14",    "protocolName": "Cell-Free protocol for HTGAA 2024",    "description": """The 2024 version of the lab is at 
                    https://howtogrowalmostanything.notion.site/Class-6-Cell-Free-Systems-05bf5e89d25a48feb557b5a26900bcec""",    "author": "adrian for HTGAA 2024"}
 
 # for OT2 the requirements block is optional so we will not include it for now. If included should remove API from metadata requirements = {"robotType": "OT-2", "apiLevel": "2.16"}
 stockLiquids:Dict=dict()
 logger = logging.getLogger(__name__)
+DROP_TIP=True
 
 def stockLiquid (well:Well, volume, liquid:Liquid) -> Liquid:
     stockLiquids[liquid.name]= well
@@ -48,30 +51,62 @@ def run(protocol: protocol_api.ProtocolContext):
     # action
     #print(stockLiquids)
     onePot=plate.wells_by_name()['A1']
+    #left_pipette.pick_up_tip()
+
     left_pipette.transfer(9.6, stockLiquids.get(water.name), onePot )              #,  mix_after(3, 50))
 
-    left_pipette.transfer(7.2, stockLiquids.get(mgGlutamate.name), onePot )   
-    left_pipette.transfer(2.8, stockLiquids.get(kGlutamate.name), onePot )   
+    left_pipette.transfer(7.2, stockLiquids.get(mgGlutamate.name), onePot ) 
+    replaceTip(left_pipette)  
+
+    left_pipette.transfer(2.8, stockLiquids.get(kGlutamate.name), onePot )
+    replaceTip(left_pipette)
+
     left_pipette.transfer(1.2, stockLiquids.get(ddt.name), onePot )  
+    replaceTip(left_pipette)
 
     # energy is 10x stock so we need to dilute to working concentration 
     energyWorking=stockLiquid( reservoir["A10"], 0, protocol.define_liquid( name="energyWorking", description="energy at working concentration", display_color="#00FF00",))
     left_pipette.transfer(27, stockLiquids.get(water.name), stockLiquids.get(energyWorking.name ))
+    replaceTip(left_pipette)
+
     left_pipette.transfer(3, stockLiquids.get(energy10x.name), stockLiquids.get(energyWorking.name ))
+    replaceTip(left_pipette)
 
     left_pipette.transfer(6, stockLiquids.get(energyWorking.name), onePot )   
+    replaceTip(left_pipette)
 
     # amino acids are 20x stock so we need to dilute to working concentration
     aminoAcidsWorking=stockLiquid( reservoir["A10"], 0, protocol.define_liquid( name="aminoAcidsWorking", description="energy at working concentration", display_color="#00FF00",))
     left_pipette.transfer(57, stockLiquids.get(water.name), stockLiquids.get(aminoAcidsWorking.name ))
-    left_pipette.transfer(3, stockLiquids.get(aminoAcids20x.name), stockLiquids.get(aminoAcidsWorking.name ))
+    replaceTip(left_pipette)
 
     left_pipette.transfer(6, stockLiquids.get(aminoAcidsWorking.name), onePot )
+    replaceTip(left_pipette)
+
     left_pipette.transfer(3, stockLiquids.get(template.name), onePot )
+    replaceTip(left_pipette)
+
     left_pipette.transfer(3, stockLiquids.get(t7.name), onePot)
-    left_pipette.transfer(20, stockLiquids.get(cellFree.name), onePot )
+    replaceTip(left_pipette)
+    
+    left_pipette.pick_up_tip()
+    left_pipette.transfer(20, stockLiquids.get(cellFree.name), onePot, new_tip='never' )
+
+    left_pipette.drop_tip()
 
     protocol.delay(INCUBATION_TIME,0,"delay for "+str(INCUBATION_TIME))
+
+
+def replaceTip(pipette:InstrumentContext):
+    # todo replace tip only for important experiments but not for tests
+    return 
+    print(" replace")
+    if DROP_TIP:
+        pipette.drop_tip()
+        pipette.pick_up_tip()
+
+
+
 
     # opentrons_simulate cellfree.py
     # If you’re curious how long that will take, you can use an experimental feature to estimate the time:

@@ -14,7 +14,8 @@ from typing import (
 )
 
 #protocol_file = open('/C:/a/diy/pythonProjects/HTGAA/labprotocol/cellfreeLab/automation/cellfree.py')
-protocol_file = open('./labprotocol/cellfreeLab/automation/cellfree.py')
+protocol_file = open('/a/diy/pythonProjects/HTGAA/labprotocol/cellfreeLab/automation/cellfree.py')
+#protocol_file = open('./labprotocol/cellfreeLab/automation/cellfree.py')
 print("adrian print in sim 0")
 messages=list()
 messages=(opentrons.simulate.simulate(protocol_file, propagate_logs=True)[0])
